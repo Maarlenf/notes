@@ -12,15 +12,15 @@ export default {
       'xl': '1280px',
       '2xl': '1536px',
     },
-    colors: {
-      'chiffon': '#F8F3E6',
-      'vanilla': '#f3c182',
-      'buttercup': '#EFAA52',
-      'rust': '#AB3E16',
-      'mahogany': '#48120E',
-      'white': '#FFFFFF',
-      'red': '	#FF0000'
-    },
+    // colors: {
+    //   'chiffon': '#F8F3E6',
+    //   'vanilla': '#f3c182',
+    //   'buttercup': '#EFAA52',
+    //   'rust': '#AB3E16',
+    //   'mahogany': '#48120E',
+    //   'white': '#FFFFFF',
+    //   'red': '	#FF0000'
+    // },
     // fontSize: {
     //   '5xl': ['9.375rem', '7rem'],
     //   'logo': ['1.25rem', '0rem']

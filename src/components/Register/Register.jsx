@@ -3,8 +3,10 @@ import { Logo } from "../Logo/Logo";
 import { FcGoogle } from "react-icons/fc";
 import { singInGoogle } from "../../service/singInGoogle";
 import { addAcount } from "../../service/createAuth";
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [pass, setPass] = useState();
   const [error, setError] = useState('');
@@ -14,7 +16,10 @@ export default function Register() {
   }
   const createUser = () => { 
     addAcount(email, pass)
-    .then((res) => res)
+    .then((res) => {
+      navigate('/dashborad');
+      res
+    })
     .catch((error) => {
         if(error.code === 'auth/weak-password'){
             setError('Password is to weak')

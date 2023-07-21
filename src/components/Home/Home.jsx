@@ -7,8 +7,10 @@ import { Logo } from "../Logo/Logo";
 import { FcGoogle } from "react-icons/fc";
 import { singInGoogle } from "../../service/singInGoogle";
 import { singInEmail } from "../../service/singInEmail";
+import {useNavigate} from 'react-router-dom'
 
 export default function Home() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [pass, setPass] = useState();
   const [error, setError] = useState('');
@@ -19,6 +21,7 @@ export default function Home() {
   const loginIn = () => {
     singInEmail(email, pass)
     .then((res) => {
+      navigate('/dashboard')
       res
     })
     .catch((err) => {
@@ -41,7 +44,7 @@ export default function Home() {
         <p className="font-[Duru] text-xl mt-5 mb-5">Welcome</p>
         <button
           onClick={loginInGoogle}
-          className="flex justify-center items-center w-full bg-buttercup h-12 text-base border border-r-mahogany rounded-lg -tracking-tighter shadow-xl mb-5"
+          className="flex justify-center items-center w-full bg-gray-900 h-12 text-base border border-mahogany rounded-lg text-white -tracking-tighter shadow-xl mb-5"
         >
           <FcGoogle area-label="Icon Google" className="mr-2" /> Join with
           Google
@@ -55,7 +58,7 @@ export default function Home() {
               value={email || ""}
               placeholder="example@example.com"
               onChange={(e) => setEmail(e.target.value)}
-              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-r-mahogany shadow-md mb-5 placeholder:p-2 "
+              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-amber-800 shadow-md mb-5 placeholder:p-2 "
             />
           </label>
           <label className="w-full">
@@ -65,7 +68,7 @@ export default function Home() {
               value={pass || ""}
               placeholder="******"
               onChange={(e) => setPass(e.target.value)}
-              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-r-mahogany shadow-md mb-5 placeholder:p-2"
+              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-amber-800 shadow-md mb-5 placeholder:p-2"
             />
           </label>
           <label aria-label="message error" className="w-full">
@@ -74,7 +77,7 @@ export default function Home() {
           <label className="w-full" aria-label="button sing in">
             <button onClick={handleSubmit}
             type="submit"
-            className="flex justify-center items-center w-full bg-vanilla h-12 text-base border border-r-mahogany rounded-lg -tracking-tighter shadow-xl mt-5">
+            className="flex justify-center items-center w-full bg-gray-700 h-12 text-base border rounded-lg -tracking-tighter shadow-xl mt-5">
               Sing In
             </button>
           </label>
