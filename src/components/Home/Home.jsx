@@ -17,6 +17,7 @@ export default function Home() {
 
   function loginInGoogle() {
     singInGoogle();
+    navigate('/dashboard');
   }
   const loginIn = () => {
     singInEmail(email, pass)
@@ -77,7 +78,7 @@ export default function Home() {
           <label className="w-full" aria-label="button sing in">
             <button onClick={handleSubmit}
             type="submit"
-            className="flex justify-center items-center w-full bg-gray-700 h-12 text-base border rounded-lg -tracking-tighter shadow-xl mt-5">
+            className="flex justify-center items-center w-full bg-gray-700 h-12 text-white text-base border rounded-lg -tracking-tighter shadow-xl mt-5">
               Sing In
             </button>
           </label>

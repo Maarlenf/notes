@@ -6,12 +6,14 @@ export default {
   ],
   theme: {
     screens: {
+      '-sm': {'min': '200px', 'max': '430px'},
       'sm': '640px',
       'md': '768px',
       'lg': '1024px',
       'xl': '1280px',
       '2xl': '1536px',
     },
+   
     // colors: {
     //   'chiffon': '#F8F3E6',
     //   'vanilla': '#f3c182',

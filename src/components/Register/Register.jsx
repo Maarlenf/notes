@@ -44,7 +44,7 @@ export default function Register() {
         <p className="font-[Duru] text-xl mt-5 mb-5">Register</p>
         <button
           onClick={loginInGoogle}
-          className="flex justify-center items-center w-full bg-buttercup h-12 text-base border border-r-mahogany rounded-lg -tracking-tighter shadow-xl mb-5"
+          className="flex justify-center items-center w-full bg-gray-900 h-12 text-base border border-mahogany rounded-lg text-white -tracking-tighter shadow-xl mb-5"
         >
           <FcGoogle area-label="Icon Google" className="mr-2" /> Join with
           Google
@@ -58,7 +58,7 @@ export default function Register() {
               value={email || ""}
               placeholder="example@example.com"
               onChange={(e) => setEmail(e.target.value)}
-              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-r-mahogany shadow-md mb-5 placeholder:p-2 "
+              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-amber-800 shadow-md mb-5 placeholder:p-2"
             />
           </label>
           <label className="w-full">
@@ -68,7 +68,7 @@ export default function Register() {
               value={pass || ""}
               placeholder="******"
               onChange={(e) => setPass(e.target.value)}
-              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-r-mahogany shadow-md mb-5 placeholder:p-2"
+              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-amber-800 shadow-md mb-5 placeholder:p-2"
             />
           </label>
           <label aria-label="message error" className="w-full">
@@ -77,7 +77,7 @@ export default function Register() {
           <label className="w-full" aria-label="button sing in">
             <button onClick={handleSubmit}
             type="submit"
-            className="flex justify-center items-center w-full bg-vanilla h-12 text-base border border-r-mahogany rounded-lg -tracking-tighter shadow-xl mt-5">
+            className="flex justify-center items-center w-full bg-gray-700 h-12 text-white text-base border rounded-lg -tracking-tighter shadow-xl mt-5">
               Sing In
             </button>
           </label>

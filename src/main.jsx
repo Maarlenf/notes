@@ -4,7 +4,7 @@ import Home from './components/Home/Home'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Register from './components/Register/Register'
-import { Dashboard } from './components/DashBoard/Dashborad'
+import { Dashboard } from './components/DashBoard/Dashboard'
 
 const router = createBrowserRouter([
   {
