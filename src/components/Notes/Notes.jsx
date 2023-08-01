@@ -1,56 +1,33 @@
 /* eslint-disable no-constant-condition */
-import { useState } from "react";
-import { FiBell, FiEdit } from "react-icons/fi";
+import { FiEdit, FiBell } from "react-icons/fi";
 
-export function Notes({ text }) {
-  const [title, setTitle] = useState(text.title);
-  const [note, setNote] = useState(text.text);
-  const [changeIcon, setChangeIcon] = useState('');
- 
-    if (!{ text }) {
-        setTitle("");
-        setNote("");
-        setChangeIcon('create')
-      }
-
-  return(
+export function Notes({title, note}) {
+  return (
     <>
-      <div className="flex flex-col items-center p-2 bg-amber-800 border border-amber-900 rounded-xl  w-72 h-72 ">
-      <div className="flex w-auto ml-16 items-center">
-        <input
-          className="w-40 rounded-lg p-1 bg-amber-800 text-gray-400"
-          type="text"
-          value={title}
-          placeholder="Cats"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <div className="ml-20 w-8 peer ... focus:shadow">
-          <FiBell size={20} />
+      <div className="flex flex-col items-center p-2 border border-amber-900 rounded-xl w-72 h-72 shadow-xl">
+        <div className="flex w-full p-2 h-10 justify-between items-center">
+          <p className="inline-block w-full rounded-lg p-1 text-neutral-950 font-bold">{title}</p>
+          <div className="flex mt-12 -mr-8 flex-col items-center">
+            <div className="peer ... focus:shadow">
+              <FiBell size={20} className="text-orange-950 hover:text-gray-900"/>
+            </div>
+            <p className="z-40 invisible peer-hover:visible text-neutral-50 bg-gray-700 rounded-xl p-1 text-center text-sm">
+              Mark as reminder
+            </p>
+          </div>
         </div>
-        <p className="float-right z-40 invisible peer-hover:visible text-white bg-gray-600 rounded-xl w-auto p-1 text-center text-sm">
-          Mark as reminder
-        </p>
-      </div>
-      <textarea
-        value={note}
-        placeholder="The cats are beatiful"
-        onChange={(e) => setNote(e.target.value)}
-        autoCapitalize="words"
-        cols={35}
-        rows={8}
-        className="resize-none bg-amber-800 text-gray-300"
-      ></textarea>
-      {changeIcon === 'create' ? (
- <button className="self-end mt-4 rounded-xl bg-gray-900 text-white text-sm p-1 w-12">
- Save
-</button>
-      ) : changeIcon === 'edit' ? (
-<FiEdit size={20} />
-      ) : null}
-     
+        <div className="overflow-hidden scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-slate-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-slate-300 scrollbar-track:!rounded hover:overflow-y-auto w-full h-full">
+        <p className= "tracking-wide indent-2 break-words text-neutral-950">{note}</p>
+        </div>
+       
+    <div className="flex flex-col-reverse items-center justify-center w-full">
+    <FiEdit size={20} className="peer ... text-orange-950 hover:text-gray-900"/>
+     <p className="z-40 invisible peer-hover:visible text-neutral-50 bg-gray-700 rounded-xl p-2 text-center text-sm">
+              Edit note
+            </p>
     </div>
+   
+      </div>
     </>
-  )
-
-  
+  );
 }
