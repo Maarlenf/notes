@@ -5,6 +5,8 @@ import {
     onSnapshot,
     query,
     orderBy,
+    updateDoc,
+    doc,
   } from 'firebase/firestore';
   import { db, auth } from './firebaseConfig';
 
@@ -23,4 +25,6 @@ import {
   
   export const createSnapShot = (callback) => onSnapshot(query(collectionNotes, orderBy('date', 'desc')), callback);
 
-  
+  export const editNote = (id, title, text) => updateDoc((doc(db, 'first-notes', id)), {
+    title, text
+  })

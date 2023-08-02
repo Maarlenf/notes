@@ -83,7 +83,7 @@ export default function Home() {
             </button>
           </label>
         </form>
-        <p className="mt-3 text-lg hover:cursor-pointer text-center ">Not a member? <a className="underline" href="/register">Register!</a></p>
+        <p className="mt-3 text-lg hover:cursor-pointer text-center -sm:w-96">Not a member? <a className="underline" href="/register">Register!</a></p>
       </div>
     </main>
   );

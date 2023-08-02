@@ -11,8 +11,9 @@ import { Notes } from "../Notes/Notes";
 export function Dashboard() {
   const navigate = useNavigate();
   const [find, setFind] = useState();
-  const [openNote, setOpenNote] = useState(false);
+  const [openNewNote, setOpenNewNote] = useState(false);
   const [notes, setNotes] = useState([]);
+ 
  console.log(notes);
   // const prueba = {
   //   title: "Aqui si funciona",
@@ -28,7 +29,8 @@ export function Dashboard() {
   })
 
  }, [])
-  
+
+ 
 
   function handleExit(){
     closeSesion();
@@ -36,22 +38,20 @@ export function Dashboard() {
   }
 
   function createNote(){
-    setOpenNote(!openNote);
+    setOpenNewNote(!openNewNote);
   }
 
   return (
-    <div className="min-h-full">
-      <nav className="border-b-2 w-full border-b-amber-900">
+    <div className="w-full">
+      <nav className="border-b-2 w-full border-b-amber-900 lg:w-full md:w-full">
         <div className="container mx-auto max-w-7xl ml-3 -sm:ml-1">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center">
-              <div className="flex w-12 h-10">
-                <div className="border w-10 h-10 rounded-xl">
-                  <p className="block-inline bg-amber-800 rounded-md text-center font-[Dongle] text-3xl/10 text-white">
+          <div className="flex h-16 items-center">
+                <div className="flex w-14 h-10 border-2 border-amber-900 items-center justify-center rounded-lg bg-gray-500">
+                  <p className="block-inline rounded-md text-center font-[Dongle] text-3xl/10 -mb-1 text-neutral-100">
                     LB
                   </p>
                 </div>
-              </div>
+           
               <div className="flex justify-around rounded-xl items-center border-2 px-4 h-10 border-gray-300 ml-2">
                 <div className="flex items-center w-6 border-r-2  border-gray-300 h-10 -ml-2 ">
                   <BsSearch />
@@ -65,11 +65,11 @@ export function Dashboard() {
                   className="container w-80 h-9 hover:h-10 hover:border-2 hover:border-gray-400 p-3"
                 ></input>
               </div>
-              <div className="flex w-full justify-end items-center -sm:hover:flex-col ">
+              <div className="flex w-full ml-4 justify-start items-center -sm:hover:flex-col ">
                 <FiLogOut onClick={handleExit} className="peer ... hover:ml-2"/>
               <p className="invisible peer-hover:visible w-16 rounded-xl text-center text-white text-sm bg-gray-700">Logout</p>
               </div>
-            </div>
+            
           </div>
         </div>
       </nav>
@@ -92,12 +92,12 @@ export function Dashboard() {
             Create new note
           </p>
         </div>
-        <div className="grid col-auto px-4 gap-4 -sm:justify-center">
-        {openNote && <NewNote onClose={createNote}/>}
+        <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row px-10 w-full h-full place-items-center gap-10 -sm:grid-cols-1 -sm:justify-items-center mb-3">
+        {openNewNote && <NewNote onClose={createNote}/>}
         {notes.map((note) => {
           return(
-            <ul key={note.date}>
-              <li><Notes title={note.title} note={note.text}/></li>
+            <ul key={note.date} className="auto-col">
+              <li><Notes title={note.title} text={note.text}/></li>
             </ul>
           )
         })}
