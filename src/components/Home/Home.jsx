@@ -7,35 +7,35 @@ import { Logo } from "../Logo/Logo";
 import { FcGoogle } from "react-icons/fc";
 import { singInGoogle } from "../../service/singInGoogle";
 import { singInEmail } from "../../service/singInEmail";
-import {useNavigate} from 'react-router-dom'
-
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [pass, setPass] = useState();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   function loginInGoogle() {
-    singInGoogle().then((res) => {
-      navigate('/dashboard');
-      res;
-    }).catch((error) => console.log(error));
+    singInGoogle()
+      .then((res) => {
+        navigate("/dashboard");
+        res;
+      })
+      .catch((error) => console.log(error));
   }
   const loginIn = () => {
     singInEmail(email, pass)
-    .then((res) => {
-      navigate('/dashboard')
-      res
-    })
-    .catch((err) => {
-      err
-      setError('Please review credential, or register.');
-    })
-  }
+      .then((res) => {
+        navigate("/dashboard");
+        res;
+      })
+      .catch((err) => {
+        err;
+        setError("Please review credential, or register.");
+      });
+  };
 
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
     loginIn();
   }
@@ -80,14 +80,21 @@ export default function Home() {
             <p className=" tracking-tighter text-red-700 -mt-4">{error}</p>
           </label>
           <label className="w-full" aria-label="button sing in">
-            <button onClick={handleSubmit}
-            type="submit"
-            className="flex justify-center items-center w-full bg-gray-700 h-12 text-white text-base border rounded-lg -tracking-tighter shadow-xl mt-5">
+            <button
+              onClick={handleSubmit}
+              type="submit"
+              className="flex justify-center items-center w-full bg-gray-700 h-12 text-white text-base border rounded-lg -tracking-tighter shadow-xl mt-5"
+            >
               Sing In
             </button>
           </label>
         </form>
-        <p className="mt-3 text-lg hover:cursor-pointer text-center -sm:w-96">Not a member? <a className="underline" href="/register">Register!</a></p>
+        <p className="mt-3 text-lg hover:cursor-pointer text-center -sm:w-96">
+          Not a member?{" "}
+          <a className="underline" href="/register">
+            Register!
+          </a>
+        </p>
       </div>
     </main>
   );
