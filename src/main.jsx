@@ -4,7 +4,7 @@ import Home from './components/Home/Home'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Register from './components/Register/Register'
-import { Dashboard } from './components/DashBoard/Dashboard'
+import Dashboard from './components/DashBoard/Dashboard'
 
 const router = createBrowserRouter([
   {
@@ -20,8 +20,9 @@ const router = createBrowserRouter([
     element:<Dashboard/>
   }
 ])
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router= {router} />
-  </React.StrictMode>,
+  </React.StrictMode>
 )

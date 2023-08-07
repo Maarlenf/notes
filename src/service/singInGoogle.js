@@ -3,11 +3,14 @@ import { auth } from "./firebaseConfig";
 
 export function singInGoogle() {
   const provider = new GoogleAuthProvider();
-  return signInWithPopup(auth, provider)
+  return new Promise((resolve, reject) => {
+    signInWithPopup(auth, provider)
     .then((res) => {
-      res;
+     const user = res.currentUser;
+     resolve(user);
     })
     .catch((error) => {
-      error;
+      reject(error);
     });
+  })
 }

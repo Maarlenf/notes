@@ -5,32 +5,39 @@ import { NewNote } from "../NewNote/NewNote";
 import { FiBell, FiLogOut } from "react-icons/fi";
 import { closeSesion } from "../../service/closeSesion";
 import { useNavigate } from "react-router-dom";
-import { createSnapShot } from "../../service/functionOfNotes";
+import { createSnapShot, watchUser} from "../../service/functionOfNotes";
 import { Notes } from "../Notes/Notes";
 
-export function Dashboard() {
+
+
+export default function Dashboard() {
   const navigate = useNavigate();
   const [find, setFind] = useState();
   const [openNewNote, setOpenNewNote] = useState(false);
   const [notes, setNotes] = useState([]);
- 
- console.log(notes);
+
   // const prueba = {
   //   title: "Aqui si funciona",
   //   text: "SIIIIII LO LOGRE",
   // };
- useEffect(() => {
-  createSnapShot((querySnapshot) => {
-    let addNote = [];
-    querySnapshot.forEach((e) => {
-     addNote.push({oid: e.id, ...e.data()});
-    });
-    setNotes(addNote);
-  })
+ 
+   useEffect(() => {
+    createSnapShot((querySnapshot) => {
+      let addNote = [];
+      querySnapshot.forEach((e) => {
+        if(e.data().emailUser === watchUser()){
+          addNote.push({oid: e.id, ...e.data()});
+        }
+      });
+      setNotes(addNote);
+    })
 
- }, [])
+  },[openNewNote]);
 
  
+  
+
+
 
   function handleExit(){
     closeSesion();
@@ -93,7 +100,7 @@ export function Dashboard() {
           </p>
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row px-10 w-full h-full place-items-center gap-10 -sm:grid-cols-1 -sm:justify-items-center mb-3">
-        {openNewNote && <NewNote onClose={createNote}/>}
+        {openNewNote && <NewNote onClose={createNote} dataNote={''}/>}
         {notes.map((note) => {
           return(
             <ul key={note.date} className="auto-col">

@@ -9,15 +9,19 @@ import { singInGoogle } from "../../service/singInGoogle";
 import { singInEmail } from "../../service/singInEmail";
 import {useNavigate} from 'react-router-dom'
 
+
 export default function Home() {
+
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [pass, setPass] = useState();
   const [error, setError] = useState('');
 
   function loginInGoogle() {
-    singInGoogle();
-    navigate('/dashboard');
+    singInGoogle().then((res) => {
+      navigate('/dashboard');
+      res;
+    }).catch((error) => console.log(error));
   }
   const loginIn = () => {
     singInEmail(email, pass)
@@ -69,11 +73,11 @@ export default function Home() {
               value={pass || ""}
               placeholder="******"
               onChange={(e) => setPass(e.target.value)}
-              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-amber-800 shadow-md mb-5 placeholder:p-2"
+              className="focus:text-center  indent-2 -tracking-tighter border w-full rounded-lg h-12 border-amber-800 shadow-md mb-5 placeholder:p-2"
             />
           </label>
           <label aria-label="message error" className="w-full">
-            <p className=" tracking-tighter text-red -mt-4">{error}</p>
+            <p className=" tracking-tighter text-red-700 -mt-4">{error}</p>
           </label>
           <label className="w-full" aria-label="button sing in">
             <button onClick={handleSubmit}
