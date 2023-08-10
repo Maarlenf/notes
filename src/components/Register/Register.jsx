@@ -17,7 +17,7 @@ export default function Register() {
   const createUser = () => { 
     addAcount(email, pass)
     .then((res) => {
-      navigate('/dashborad');
+      navigate('/wall');
       res
     })
     .catch((error) => {
@@ -44,13 +44,13 @@ export default function Register() {
         <p className="font-[Duru] text-xl mt-5 mb-5">Register</p>
         <button
           onClick={loginInGoogle}
-          className="flex -sm:w-96 justify-center items-center w-full bg-gray-900 h-12 text-base border border-mahogany rounded-lg text-white -tracking-tighter shadow-xl mb-5"
+          className="flex -sm:w-80 justify-center items-center w-full bg-gray-900 h-12 text-base border border-mahogany rounded-lg text-white -tracking-tighter shadow-xl mb-5"
         >
           <FcGoogle area-label="Icon Google" className="mr-2" /> Join with
           Google
         </button>
         <p className="text-lg">Created your account</p>
-        <form className="flex flex-col justify-start w-full mb-1 -sm:w-96">
+        <form className="flex flex-col justify-start w-full mb-1 -sm:w-80">
           <label className="w-full">
             <p className="-tracking-tighterv ml-1">Email</p>
             <input
@@ -58,7 +58,7 @@ export default function Register() {
               value={email || ""}
               placeholder="example@example.com"
               onChange={(e) => setEmail(e.target.value)}
-              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-amber-800 shadow-md mb-5 placeholder:p-2"
+              className="p-3 focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-amber-800 shadow-md mb-5 placeholder:p-2"
             />
           </label>
           <label className="w-full">
@@ -68,11 +68,11 @@ export default function Register() {
               value={pass || ""}
               placeholder="******"
               onChange={(e) => setPass(e.target.value)}
-              className="focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-amber-800 shadow-md mb-5 placeholder:p-2"
+              className="p-3 focus:text-center -tracking-tighter border w-full rounded-lg h-12 border-amber-800 shadow-md mb-5 placeholder:p-2"
             />
           </label>
           <label aria-label="message error" className="w-full">
-            <p className=" tracking-tighter text-red -mt-4">{error}</p>
+            <p className=" tracking-tighter text-red-900 -mt-4">{error}</p>
           </label>
           <label className="w-full" aria-label="button sing in">
             <button onClick={handleSubmit}

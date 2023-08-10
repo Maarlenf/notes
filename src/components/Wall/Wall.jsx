@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { BsSearch, BsPlusCircle } from "react-icons/bs";
 import { useEffect, useState } from "react";
 // import { Notes } from "../Notes/Notes";
@@ -7,17 +8,29 @@ import { closeSesion } from "../../service/closeSesion";
 import { useNavigate } from "react-router-dom";
 import { createSnapShot, watchUser } from "../../service/functionOfNotes";
 import { Notes } from "../Notes/Notes";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../service/firebaseConfig";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [find, setFind] = useState();
+  const [find, setFind] = useState('');
   const [openNewNote, setOpenNewNote] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [findNotes, setFindNotes] = useState([]);
+  
+  useEffect(() => {
+    const currentPath = window.location.pathname;
 
-  // const prueba = {
-  //   title: "Aqui si funciona",
-  //   text: "SIIIIII LO LOGRE",
-  // };
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/wall");
+      } else if (currentPath === "/wall" && user === null) {
+        navigate("/");
+      } else {
+        navigate(currentPath || "/");
+      }
+    });
+  }, [navigate]);
 
   useEffect(() => {
     createSnapShot((querySnapshot) => {
@@ -28,8 +41,23 @@ export default function Dashboard() {
         }
       });
       setNotes(addNote);
+      setFindNotes(addNote);
     });
   }, [openNewNote]);
+
+ 
+  useEffect(() => {
+    findNote(find);
+  }, [find, findNote]);
+
+  function findNote(oneNote){
+    if (oneNote) {
+      setFindNotes(notes.filter((note) => note.title.toLowerCase().includes(oneNote.toLowerCase())));
+    } else {
+      setFindNotes(notes);
+    }
+  }
+
 
   function handleExit() {
     closeSesion();
@@ -40,13 +68,19 @@ export default function Dashboard() {
     setOpenNewNote(!openNewNote);
   }
 
+  const handleShowReminder = () => {
+    navigate('/reminders');
+  }
+
+  
+
   return (
     <div className="w-full">
-      <nav className="border-b-2 w-full border-b-amber-900 lg:w-full md:w-full">
+      <nav className="border-b-2 w-screen border-b-amber-900 lg:w-full md:w-screen -sm:w-screen">
         <div className="container mx-auto max-w-7xl ml-3 -sm:ml-1">
           <div className="flex h-16 items-center">
-            <div className="flex w-14 h-10 border-2 border-amber-900 items-center justify-center rounded-lg bg-gray-500">
-              <p className="block-inline rounded-md text-center font-[Dongle] text-3xl/10 -mb-1 text-neutral-100">
+            <div className="flex w-14 h-10 border-2 border-amber-900 items-center justify-center rounded-lg -sm:border-2">
+              <p className="block-inline rounded-md text-center font-[Dongle] text-3xl/10 -mb-1 text-gray-900 md:w-8 sm:w-8 -sm:w-8">
                 LB
               </p>
             </div>
@@ -59,13 +93,13 @@ export default function Dashboard() {
               <input
                 type="text"
                 placeholder="Busca lo que quieras"
-                value={find || ""}
+                value={find}
                 onChange={(e) => setFind(e.target.value)}
                 className="container w-80 h-9 hover:h-10 hover:border-2 hover:border-gray-400 p-3"
               ></input>
             </div>
-            <div className="flex w-full ml-4 justify-start items-center -sm:hover:flex-col ">
-              <FiLogOut onClick={handleExit} className="peer ... hover:ml-2" />
+            <div className="flex w-full ml-4 justify-start items-center ">
+              <FiLogOut onClick={handleExit} className="peer ..." />
               <p className="invisible peer-hover:visible w-16 rounded-xl text-center text-white text-sm bg-gray-700">
                 Logout
               </p>
@@ -78,7 +112,7 @@ export default function Dashboard() {
           <span className="text-center bg-gray-800 text-white p-2 shadow-lg  border border-gray-500 rounded-s-xl w-full">
             Notes
           </span>
-          <div className="flex items-center justify-center border border-gray-500 hover:bg-gray-700 text-gray-600 hover:text-white p-2 shadow-lg rounded-e-xl w-full ">
+          <div onClick={handleShowReminder} className="flex items-center justify-center border border-gray-500 hover:bg-gray-700 text-gray-600 hover:text-white p-2 shadow-lg rounded-e-xl w-full ">
             <p className="text-center mr-2 ">Reminders</p>
             <FiBell className="w-4" />
           </div>
@@ -94,11 +128,11 @@ export default function Dashboard() {
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row px-10 w-full h-full place-items-center gap-10 -sm:grid-cols-1 -sm:justify-items-center mb-3">
           {openNewNote && <NewNote onClose={createNote} dataNote={""} />}
-          {notes.map((note) => {
+          {findNotes.map((note) => {
             return (
               <ul key={note.date} className="auto-col">
                 <li>
-                  <Notes title={note.title} text={note.text} />
+                  <Notes title={note.title} text={note.text} id={note.oid} reminders={note.reminders} />
                 </li>
               </ul>
             );
