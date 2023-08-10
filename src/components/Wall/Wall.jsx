@@ -81,7 +81,7 @@ export default function Dashboard() {
           <div className="flex h-16 items-center">
             <div className="flex w-14 h-10 border-2 border-amber-900 items-center justify-center rounded-lg -sm:border-2">
               <p className="block-inline rounded-md text-center font-[Dongle] text-3xl/10 -mb-1 text-gray-900 md:w-8 sm:w-8 -sm:w-8">
-                LB
+                LN
               </p>
             </div>
 
