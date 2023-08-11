@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { BsSearch, BsPlusCircle } from "react-icons/bs";
 import { useEffect, useState } from "react";
 // import { Notes } from "../Notes/Notes";
@@ -14,7 +15,8 @@ export default function Reminders() {
   const [find, setFind] = useState();
   const [openNewNote, setOpenNewNote] = useState(false);
   const [notes, setNotes] = useState([]);
-
+  const [findNotes, setFindNotes] = useState([]);
+  
   useEffect(() => {
     const currentPath = window.location.pathname;
 
@@ -38,9 +40,22 @@ export default function Reminders() {
         }
       });
       setNotes(addNote);
+      setFindNotes(addNote);
     });
   }, [openNewNote]);
 
+  useEffect(() => {
+    findNote(find);
+  }, [find, findNote]);
+
+  function findNote(oneNote){
+    if (oneNote) {
+      setFindNotes(notes.filter((note) => note.title.toLowerCase().includes(oneNote.toLowerCase())));
+    } else {
+      setFindNotes(notes);
+    }
+  }
+ 
   function handleExit() {
     closeSesion();
     navigate("/");
@@ -54,38 +69,38 @@ export default function Reminders() {
     navigate("/wall");
   }
   return (
-    <div className="w-full ">
-      <nav className="border-b-2 w-full border-b-amber-900 lg:w-full md:w-full">
-        <div className="container mx-auto max-w-7xl ml-3 -sm:ml-1">
-          <div className="flex h-16 items-center">
-            <div className="flex w-14 h-10 border-2 border-amber-900 items-center justify-center rounded-lg bg-gray-500">
-              <p className="block-inline rounded-md text-center font-[Dongle] text-3xl/10 -mb-1 text-neutral-100 -sm:w-8">
-                LN
-              </p>
-            </div>
+    <div className="w-screen">
+    <nav className="border-b-2 w-screen border-b-amber-900 ">
+     <div className="container ml-3 w-screen">
+       <div className="flex h-16 items-center w-screen -ml-3 sm:mr-2">
+         <div className="flex ml-2 w-20 2xl:w-14 xl:w-16 lg:w-[4.5rem] md:w-20 sm:w-32 -sm:w-32 h-10 border-2 border-amber-900 items-center justify-center rounded-lg">
+           <p className="block-inline w- rounded-md text-center font-[Dongle] text-3xl/10 -mb-1 text-gray-900">
+             LN
+           </p>
+         </div>
 
-            <div className="flex justify-around rounded-xl items-center border-2 px-4 h-10 border-gray-300 ml-2">
-              <div className="flex items-center w-6 border-r-2  border-gray-300 h-10 -ml-2 ">
-                <BsSearch />
-              </div>
+         <div className="flex justify-around rounded-xl items-center border-2 px-4 h-10  border-gray-300 ml-4">
+           <div className="flex items-center w-6 border-r-2  border-gray-300 h-10 -ml-2 ">
+             <BsSearch />
+           </div>
 
-              <input
-                type="text"
-                placeholder="Busca lo que quieras"
-                value={find || ""}
-                onChange={(e) => setFind(e.target.value)}
-                className="container w-80 h-9 hover:h-10 hover:border-2 hover:border-gray-400 p-3"
-              ></input>
-            </div>
-            <div className="flex w-full ml-4 justify-start items-center">
-              <FiLogOut onClick={handleExit} className="peer ..." />
-              <p className="invisible peer-hover:visible w-16 rounded-xl text-center text-white text-sm bg-gray-700">
-                Logout
-              </p>
-            </div>
-          </div>
-        </div>
-      </nav>
+           <input
+             type="text"
+             placeholder="Find for title..."
+             value={find || ""}
+             onChange={(e) => setFind(e.target.value)}
+             className="container w-80 -sm:w-96 sm:w-80 md:w-96 lg:w-96 xl:w-96 2xl:w-96 h-9 hover:h-10 hover:border-2 hover:border-gray-400 p-3"
+           ></input>
+         </div>
+         <div className="flex flex-col w-screen ml-6 justify-center items-end md:mr-6 -sm:mr-5 sm:mr-5">
+           <FiLogOut onClick={handleExit} size={18} className="peer ... md:mr-6 -sm:mr-6 sm:mr-6" />
+           <p className="invisible peer-hover:visible w-16 rounded-xl text-center text-white text-sm bg-gray-700">
+             Logout
+           </p>
+         </div>
+       </div>
+     </div>
+   </nav>
       <header>
         <div className="flex w-full px-2 items-center mt-2 justify-center border-r-2-grey-300">
           <span onClick={handleShowAllNotes} className=" flex items-center justify-center border border-gray-500 hover:bg-gray-700 text-gray-600 hover:text-white p-2 shadow-lg rounded-s-xl w-full">
@@ -107,7 +122,7 @@ export default function Reminders() {
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row px-10 w-full h-full place-items-center gap-10 -sm:grid-cols-1 -sm:justify-items-center mb-3">
           {openNewNote && <NewNote onClose={createNote} dataNote={""} />}
-          {notes.map((note) => {
+          {findNotes.map((note) => {
             return (
               <ul key={note.date} className="auto-col">
                 <li>

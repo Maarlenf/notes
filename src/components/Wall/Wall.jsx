@@ -75,31 +75,31 @@ export default function Dashboard() {
   
 
   return (
-    <div className="w-full">
-      <nav className="border-b-2 w-screen border-b-amber-900 lg:w-full md:w-screen -sm:w-screen">
-        <div className="container mx-auto max-w-7xl ml-3 -sm:ml-1">
-          <div className="flex h-16 items-center">
-            <div className="flex w-14 h-10 border-2 border-amber-900 items-center justify-center rounded-lg -sm:border-2">
-              <p className="block-inline rounded-md text-center font-[Dongle] text-3xl/10 -mb-1 text-gray-900 md:w-8 sm:w-8 -sm:w-8">
+    <div className="w-screen">
+       <nav className="border-b-2 w-screen border-b-amber-900 ">
+        <div className="container ml-3 w-screen">
+          <div className="flex h-16 items-center -ml-3 sm:mr-2">
+            <div className="flex ml-2 w-20 2xl:w-14 xl:w-16 lg:w-[4.5rem] md:w-20 sm:w-32 -sm:w-32 h-10 border-2 border-amber-900 items-center justify-center rounded-lg">
+              <p className="block-inline w- rounded-md text-center font-[Dongle] text-3xl/10 -mb-1 text-gray-900">
                 LN
               </p>
             </div>
 
-            <div className="flex justify-around rounded-xl items-center border-2 px-4 h-10 border-gray-300 ml-2">
+            <div className="flex justify-around rounded-xl items-center border-2 px-4 h-10  border-gray-300 ml-4">
               <div className="flex items-center w-6 border-r-2  border-gray-300 h-10 -ml-2 ">
                 <BsSearch />
               </div>
 
               <input
                 type="text"
-                placeholder="Busca lo que quieras"
-                value={find}
+                placeholder="Find for title..."
+                value={find || ""}
                 onChange={(e) => setFind(e.target.value)}
-                className="container w-80 h-9 hover:h-10 hover:border-2 hover:border-gray-400 p-3"
+                className="container w-80 -sm:w-80 sm:w-80 md:w-96 lg:w-96 xl:w-96 2xl:w-96 h-9 hover:h-10 hover:border-2 hover:border-gray-400 p-3"
               ></input>
             </div>
-            <div className="flex w-full ml-4 justify-start items-center ">
-              <FiLogOut onClick={handleExit} className="peer ..." />
+            <div className="flex flex-col w-screen ml-6 justify-center items-end md:mr-6 -sm:mr-5 sm:mr-5">
+              <FiLogOut onClick={handleExit} size={18} className="peer ... md:mr-6 -sm:mr-6 sm:mr-6" />
               <p className="invisible peer-hover:visible w-16 rounded-xl text-center text-white text-sm bg-gray-700">
                 Logout
               </p>
@@ -119,7 +119,7 @@ export default function Dashboard() {
         </div>
       </header>
       <main>
-        <div className="container flex items-center mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="container flex w-screen justify-start items-center px-4 py-6 sm:px-6 lg:px-8">
           {/* <div className="flex items-center w-14 h-14 rounded-full hover:"> */}
           <BsPlusCircle size={48} className=" peer ... " onClick={createNote} />
           <p className="flex invisible peer-hover:visible bg-gray-700 text-white text-sm rounded-xl w-40 h-8 text-center items-center justify-center">
