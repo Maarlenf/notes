@@ -45,3 +45,5 @@ import {
   })
 
   export const deleteNote = (id) =>  deleteDoc(doc(collectionNotes, id))
+
+  

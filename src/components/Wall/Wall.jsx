@@ -13,11 +13,11 @@ import { auth } from "../../service/firebaseConfig";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [find, setFind] = useState('');
+  const [find, setFind] = useState("");
   const [openNewNote, setOpenNewNote] = useState(false);
   const [notes, setNotes] = useState([]);
   const [findNotes, setFindNotes] = useState([]);
-  
+
   useEffect(() => {
     const currentPath = window.location.pathname;
 
@@ -45,19 +45,21 @@ export default function Dashboard() {
     });
   }, [openNewNote]);
 
- 
   useEffect(() => {
     findNote(find);
   }, [find, findNote]);
 
-  function findNote(oneNote){
+  function findNote(oneNote) {
     if (oneNote) {
-      setFindNotes(notes.filter((note) => note.title.toLowerCase().includes(oneNote.toLowerCase())));
+      setFindNotes(
+        notes.filter((note) =>
+          note.title.toLowerCase().includes(oneNote.toLowerCase())
+        )
+      );
     } else {
       setFindNotes(notes);
     }
   }
-
 
   function handleExit() {
     closeSesion();
@@ -69,50 +71,54 @@ export default function Dashboard() {
   }
 
   const handleShowReminder = () => {
-    navigate('/reminders');
-  }
-
-  
+    navigate("/reminders");
+  };
 
   return (
     <div className="w-screen">
-       <nav className="border-b-2 w-screen border-b-amber-900 ">
-        <div className="container ml-3 w-screen">
-          <div className="flex h-16 items-center -ml-3 sm:mr-2">
-            <div className="flex ml-2 w-20 2xl:w-14 xl:w-16 lg:w-[4.5rem] md:w-20 sm:w-32 -sm:w-32 h-10 border-2 border-amber-900 items-center justify-center rounded-lg">
-              <p className="block-inline w- rounded-md text-center font-[Dongle] text-3xl/10 -mb-1 text-gray-900">
-                LN
-              </p>
-            </div>
-
-            <div className="flex justify-around rounded-xl items-center border-2 px-4 h-10  border-gray-300 ml-4">
-              <div className="flex items-center w-6 border-r-2  border-gray-300 h-10 -ml-2 ">
-                <BsSearch />
-              </div>
-
-              <input
-                type="text"
-                placeholder="Find for title..."
-                value={find || ""}
-                onChange={(e) => setFind(e.target.value)}
-                className="container w-80 -sm:w-80 sm:w-80 md:w-96 lg:w-96 xl:w-96 2xl:w-96 h-9 hover:h-10 hover:border-2 hover:border-gray-400 p-3"
-              ></input>
-            </div>
-            <div className="flex flex-col w-screen ml-6 justify-center items-end md:mr-6 -sm:mr-5 sm:mr-5">
-              <FiLogOut onClick={handleExit} size={18} className="peer ... md:mr-6 -sm:mr-6 sm:mr-6" />
-              <p className="invisible peer-hover:visible w-16 rounded-xl text-center text-white text-sm bg-gray-700">
-                Logout
-              </p>
-            </div>
-          </div>
+      <nav className="w-screen border-b-2 border-b-amber-900 p-2">
+        <div className="flex w-full mr-3">
+        <div className="flex ml-1 mr-3 border-2 border-amber-900 items-center justify-center rounded-lg px-2">
+          <p className="block-inline rounded-md text-center font-[Dongle] text-3xl/10 -mb-1 text-gray-900">
+            LN
+          </p>
         </div>
+
+        <div className="flex p-2 w-full justify-evenly rounded-xl items-center border-2 h-10  border-gray-300">
+          <div className="flex justify-center items-center w-6 border-r-2 border-gray-300 h-10">
+            <BsSearch />
+          </div>
+          <input
+            type="text"
+            placeholder="Find for title..."
+            value={find || ""}
+            onChange={(e) => setFind(e.target.value)}
+            className="w-full h-9 hover:h-10 hover:border-2 hover:rounded-md hover:border-gray-400 p-3"
+          ></input>
+        </div>
+
+        <div className="container mr-3 self-end flex flex-col items-end">
+          <FiLogOut
+            onClick={handleExit}
+            size={18}
+            className="peer ..."
+          />
+          <p className="invisible peer-hover:visible w-16 rounded-xl text-center text-white text-sm bg-gray-700">
+            Logout
+          </p>
+        </div>
+        </div>
+      
       </nav>
       <header>
         <div className="flex w-full px-2 items-center mt-2 justify-center border-r-2-grey-300">
           <span className="text-center bg-gray-800 text-white p-2 shadow-lg  border border-gray-500 rounded-s-xl w-full">
             Notes
           </span>
-          <div onClick={handleShowReminder} className="flex items-center justify-center border border-gray-500 hover:bg-gray-700 text-gray-600 hover:text-white p-2 shadow-lg rounded-e-xl w-full ">
+          <div
+            onClick={handleShowReminder}
+            className="flex items-center justify-center border border-gray-500 hover:bg-gray-700 text-gray-600 hover:text-white p-2 shadow-lg rounded-e-xl w-full "
+          >
             <p className="text-center mr-2 ">Reminders</p>
             <FiBell className="w-4" />
           </div>
@@ -132,7 +138,12 @@ export default function Dashboard() {
             return (
               <ul key={note.date} className="auto-col">
                 <li>
-                  <Notes title={note.title} text={note.text} id={note.oid} reminders={note.reminders} />
+                  <Notes
+                    title={note.title}
+                    text={note.text}
+                    id={note.oid}
+                    reminders={note.reminders}
+                  />
                 </li>
               </ul>
             );

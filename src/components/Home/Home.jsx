@@ -54,7 +54,7 @@ export default function Home() {
           <FcGoogle area-label="Icon Google" className="mr-2" /> Join with
           Google
         </button>
-        <p className="text-lg -sm:w-80 text-center">Sing in to your account</p>
+        <p className="text-lg -sm:w-80 text-center">Sign in to your account</p>
         <form className="flex flex-col justify-start w-full mb-1 -sm:w-80">
           <label className="w-full">
             <p className="-tracking-tighterv ml-1">Email</p>
@@ -85,7 +85,7 @@ export default function Home() {
               type="submit"
               className="flex justify-center items-center w-full bg-gray-700 h-12 text-white text-base border rounded-lg -tracking-tighter shadow-xl mt-5"
             >
-              Sing In
+              Sign In
             </button>
           </label>
         </form>
