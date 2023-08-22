@@ -48,6 +48,7 @@ export default function Home() {
       <div className="container flex items-center flex-col justify-around w-10/12 md:mt-32 -sm:w-80 ">
         <p className="font-[Duru] text-xl mt-5 mb-5">Welcome</p>
         <button
+        id= 'btnGoogle'
           onClick={loginInGoogle}
           className="flex -sm:w-80 justify-center items-center w-full bg-gray-900 h-12 text-base border border-mahogany rounded-lg text-white -tracking-tighter shadow-xl mb-5"
         >
@@ -77,12 +78,13 @@ export default function Home() {
             />
           </label>
           <label aria-label="message error" className="w-full">
-            <p className=" tracking-tighter text-red-700 -mt-4">{error}</p>
+            <p  id="failLogin" className=" tracking-tighter text-red-700 -mt-4">{error}</p>
           </label>
           <label className="w-full" aria-label="button sing in">
             <button
               onClick={handleSubmit}
               type="submit"
+              id='btnLogin'
               className="flex justify-center items-center w-full bg-gray-700 h-12 text-white text-base border rounded-lg -tracking-tighter shadow-xl mt-5"
             >
               Sign In
